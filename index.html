@@ -52,6 +52,8 @@ button{font-family:inherit;cursor:pointer}
 .loading{position:absolute;inset:auto 14px 14px 14px;border:1px solid #225d87;border-radius:10px;background:#04182cdd;padding:9px 12px;text-align:center;font-size:12px;color:#c7e8f8;pointer-events:none}
 .err{display:none;color:#ffd9d9;background:#351b27;border-color:#9d465b}
 .note{font-size:11px;color:#9cb8d1;line-height:1.7;margin-top:10px}
+.reference{margin-top:16px;padding:16px}
+.reference img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #1e6392}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.stage{height:60vh;min-height:390px}.side{display:grid;grid-template-columns:1fr 1fr}.info{grid-column:1/-1}}
 @media(max-width:560px){.wrap{padding:12px 9px 24px}.stage{height:53vh;min-height:340px}.side{display:flex}.controls{gap:6px}.ctrl{padding:8px 9px;font-size:12px}.hotspot .tag{font-size:10px;max-width:110px}.part-grid{grid-template-columns:1fr 1fr}.pill{font-size:11px}}
 </style>
@@ -73,8 +75,9 @@ button{font-family:inherit;cursor:pointer}
         <span class="hint">Drag to rotate · Pinch to zoom</span>
       </div>
       <div class="stage">
+        <!-- تأكد من رفع ملف النموذج بصيغة heart.glb بجانب ملف الـ HTML -->
         <model-viewer id="heart"
-          src="https://modelviewer.dev/shared-assets/models/heart.glb"
+          src="heart.glb"
           alt="Human heart anatomical 3D model"
           camera-controls
           interaction-prompt="auto"
@@ -103,7 +106,7 @@ button{font-family:inherit;cursor:pointer}
           <button class="hotspot" slot="hotspot-cor" data-position="0m -0.024m 0.035m" data-normal="0 0 1" data-part="cor"><span class="dot">10</span><span class="tag">Coronary · التاجية</span></button>
         </model-viewer>
         <div class="loading" id="status">جارٍ تحميل المجسّم ثلاثي الأبعاد…</div>
-        <div class="loading err" id="error">تعذّر تحميل المجسّم. تحقق من اتصالك بالإنترنت.</div>
+        <div class="loading err" id="error">تعذّر تحميل المجسّم. تأكد من رفع ملف heart.glb بجانب ملف الـ HTML.</div>
       </div>
       <div class="controls">
         <button class="ctrl active" data-view="front">الأمام</button>
@@ -141,8 +144,15 @@ button{font-family:inherit;cursor:pointer}
     </aside>
   </main>
 
+  <section class="card reference">
+    <h2>مرجع الجهات الأربع</h2>
+    <p class="hint">لوحة توضيحية ثابتة للمقارنة بين الأمام والخلف والجانب الأيمن والأيسر.</p>
+    <!-- تم ربط اسم الصورة بناءً على الصورة التي أرسلتها -->
+    <img src="heart_4_views_reference.png" alt="Four anatomical views of the human heart with bilingual labels">
+  </section>
+
   <div class="foot">
-    عارض تعليمي يستخدم نموذج قلب ثلاثي الأبعاد مجاني؛ يتطلب اتصالاً بالإنترنت.
+    عارض تعليمي يستخدم نموذج قلب ثلاثي الأبعاد؛ يتطلب اتصالاً بالإنترنت لتحميل المكتبة.
   </div>
 </div>
 <script>
@@ -212,4 +222,4 @@ document.getElementById('reset').addEventListener('click',()=>{
 selectPart('lv');
 </script>
 </body>
-  </html>
+</html>
