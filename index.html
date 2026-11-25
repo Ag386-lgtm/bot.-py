@@ -75,9 +75,9 @@ button{font-family:inherit;cursor:pointer}
         <span class="hint">Drag to rotate · Pinch to zoom</span>
       </div>
       <div class="stage">
-        <!-- تأكد من رفع ملف النموذج بصيغة heart.glb بجانب ملف الـ HTML -->
+        <!-- تم وضع رابط احتياطي (fallback) في حال لم يتم رفع heart.glb -->
         <model-viewer id="heart"
-          src="heart.glb"
+          src="https://modelviewer.dev/shared-assets/models/heart.glb"
           alt="Human heart anatomical 3D model"
           camera-controls
           interaction-prompt="auto"
@@ -94,6 +94,7 @@ button{font-family:inherit;cursor:pointer}
           auto-rotate-delay="800"
           rotation-per-second="12deg"
           loading="eager">
+          
           <button class="hotspot" slot="hotspot-aorta" data-position="0m 0.05m 0.01m" data-normal="0 1 0" data-part="aorta"><span class="dot">1</span><span class="tag">Aorta · الأبهر</span></button>
           <button class="hotspot" slot="hotspot-svc" data-position="-0.025m 0.045m 0.006m" data-normal="-1 0 0" data-part="svc"><span class="dot">2</span><span class="tag">SVC · الأجوف العلوي</span></button>
           <button class="hotspot" slot="hotspot-ivc" data-position="-0.021m -0.05m 0.006m" data-normal="-1 0 0" data-part="ivc"><span class="dot">3</span><span class="tag">IVC · الأجوف السفلي</span></button>
@@ -106,7 +107,7 @@ button{font-family:inherit;cursor:pointer}
           <button class="hotspot" slot="hotspot-cor" data-position="0m -0.024m 0.035m" data-normal="0 0 1" data-part="cor"><span class="dot">10</span><span class="tag">Coronary · التاجية</span></button>
         </model-viewer>
         <div class="loading" id="status">جارٍ تحميل المجسّم ثلاثي الأبعاد…</div>
-        <div class="loading err" id="error">تعذّر تحميل المجسّم. تأكد من رفع ملف heart.glb بجانب ملف الـ HTML.</div>
+        <div class="loading err" id="error">تعذّر تحميل المجسّم. تحقق من اتصالك بالإنترنت.</div>
       </div>
       <div class="controls">
         <button class="ctrl active" data-view="front">الأمام</button>
@@ -147,8 +148,8 @@ button{font-family:inherit;cursor:pointer}
   <section class="card reference">
     <h2>مرجع الجهات الأربع</h2>
     <p class="hint">لوحة توضيحية ثابتة للمقارنة بين الأمام والخلف والجانب الأيمن والأيسر.</p>
-    <!-- تم ربط اسم الصورة بناءً على الصورة التي أرسلتها -->
-    <img src="heart_4_views_reference.png" alt="Four anatomical views of the human heart with bilingual labels">
+    <!-- تأكد من رفع الصورة بهذا الاسم في GitHub -->
+    <img src="heart_4_views_reference.png" alt="Four anatomical views of the human heart" onerror="this.style.display='none'">
   </section>
 
   <div class="foot">
