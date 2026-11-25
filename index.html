@@ -4,8 +4,57 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#04152b">
+<title>الموقع الرئيسي | عارض القلب</title>
+<style>
+/* تنسيقات الصفحة الرئيسية */
+:root{--bg:#04152b;--panel:#081e3a;--line:#1b8fe8;--cyan:#55dfff;--text:#f3f8ff;--muted:#b8cbe0;--glow:0 0 18px #168fe866}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 35%,#0a2a4e 0,#04152b 55%,#020b18 100%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+h1{font-size:clamp(24px,4vw,40px);margin-bottom:20px;text-align:center;text-shadow:0 0 10px var(--cyan);}
+.btn-main{background:linear-gradient(135deg, #0b2b50, #1b8fe8);color:white;border:2px solid var(--cyan);padding:15px 30px;font-size:18px;border-radius:15px;cursor:pointer;box-shadow:0 0 20px var(--glow);transition:0.3s;font-weight:bold;}
+.btn-main:hover{transform:scale(1.05);box-shadow:0 0 30px var(--cyan);}
+
+/* تنسيقات النافذة المنبثقة */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(2, 11, 24, 0.95); z-index: 9999; justify-content: center; align-items: center;
+}
+.modal-content {
+  width: 100%; height: 100%; background: #04152b; overflow: hidden; position: relative; display: flex; flex-direction: column;
+}
+.close-btn { 
+  position: absolute; top: 15px; left: 15px; z-index: 10000; background: #9d465b; color: white; 
+  border: 2px solid #ffb3c1; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.modal-iframe { width: 100%; height: 100%; border: none; }
+</style>
+</head>
+<body>
+
+  <h1>مرحباً بك في العارض ثلاثي الأبعاد</h1>
+  <button class="btn-main" onclick="openModal()">🫀 فتح نموذج القلب ثلاثي الأبعاد</button>
+
+  <!-- النافذة المنبثقة -->
+  <div class="modal-overlay" id="myModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">✖ إغلاق</button>
+      <!-- الإطار الذي سيحتوي على الكود الخاص بك -->
+      <iframe id="heartIframe" class="modal-iframe" srcdoc=""></iframe>
+    </div>
+  </div>
+
+<script>
+// ضع كود ملف القلب بالكامل هنا بين علامات الاقتباس المزدوجة (لكن يجب تنظيفه من علامات الاقتباس المفردة)
+// أسهل طريقة: سنقوم بتحميل الكود من متغير خارجي لتجنب مشاكل علامات الاقتباس
+const heartCode = `
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04152b">
 <title>القلب البشري | تشريح ثلاثي الأبعاد</title>
-<script type="module" src="https://unpkg.com/@google/model-viewer@3.3.0/dist/model-viewer.min.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.3.0/dist/model-viewer.min.js"><\/script>
 <style>
 :root{--bg:#04152b;--panel:#081e3a;--panel2:#0b2749;--line:#1b8fe8;--cyan:#55dfff;--text:#f3f8ff;--muted:#b8cbe0;--glow:0 0 18px #168fe866}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 35%,#0a2a4e 0,#04152b 55%,#020b18 100%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
@@ -56,7 +105,7 @@ button{font-family:inherit;cursor:pointer}
       <div class="viewer-head"><strong>المجسّم التشريحي</strong><span class="hint">Drag to rotate · Pinch to zoom</span></div>
       <div class="stage">
         <model-viewer id="heart" 
-          src="./heart.glb"
+          src="https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb"
           alt="Human heart anatomical 3D cutaway model"
           camera-controls interaction-prompt="auto" interaction-prompt-threshold="900"
           camera-orbit="0deg 75deg auto" camera-target="0m 0m 0m"
@@ -74,7 +123,7 @@ button{font-family:inherit;cursor:pointer}
           <button class="hotspot" slot="hotspot-cor" data-position="0m -0.025m 0.036m" data-normal="0 0 1" data-part="cor"><span class="dot">10</span><span class="tag">Coronary vessels · التاجية</span></button>
         </model-viewer>
         <div class="loading" id="status">جارٍ تحميل المجسّم ثلاثي الأبعاد… قد يحتاج لحظات واتصال إنترنت</div>
-        <div class="loading err" id="error">تعذّر تحميل heart.glb. تأكد من رفعه بجانب index.html وبنفس الاسم تماماً.</div>
+        <div class="loading err" id="error">تعذّر تحميل المجسّم من المصدر. استخدم رابط العارض البديل أسفل الصفحة.</div>
       </div>
       <div class="controls">
         <button class="ctrl active" data-view="front">الأمام</button>
@@ -117,9 +166,7 @@ button{font-family:inherit;cursor:pointer}
     <img src="heart_4_views_reference.png" alt="Four anatomical views of the human heart with bilingual labels">
   </section>
   <div class="foot">
-    هذا عارض تعليمي يستخدم نموذج قلب ثلاثي الأبعاد خارجي؛ يتطلب اتصالاً بالإنترنت لتحميل النموذج ومكتبة العرض. لا يمثل استخراجاً مطابقاً لمجسّم الصورة الأصلية.
-    <br><a href="https://grab3d.com/models/anatomy/human-heart-cutaway/" target="_blank" rel="noopener">صفحة مصدر المجسّم ثلاثي الأبعاد</a> ·
-    <a href="https://3d.nih.gov/entries/3DPX-022787" target="_blank" rel="noopener">فتح العارض الأصلي البديل</a>
+    هذا عارض تعليمي يستخدم نموذج قلب ثلاثي الأبعاد خارجي؛ يتطلب اتصالاً بالإنترنت لتحميل النموذج ومكتبة العرض.
   </div>
 </div>
 <script>
@@ -143,10 +190,27 @@ const parts={
 function selectPart(id){const p=parts[id];if(!p)return;document.getElementById('info-ar').textContent=p.ar;document.getElementById('info-en').textContent=p.en;document.getElementById('info-text').textContent=p.text;document.querySelectorAll('[data-part]').forEach(b=>b.classList.toggle('active',b.dataset.part===id));}
 document.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>selectPart(b.dataset.part)));
 const views={front:0,back:180,right:90,left:-90};
-document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.view;heart.removeAttribute('auto-rotate');document.getElementById('auto').classList.remove('active');heart.setAttribute('camera-orbit',`${views[v]}deg 75deg auto`);document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));}));
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.view;heart.removeAttribute('auto-rotate');document.getElementById('auto').classList.remove('active');heart.setAttribute('camera-orbit',\`\${views[v]}deg 75deg auto\`);document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));}));
 document.getElementById('auto').addEventListener('click',e=>{const on=!heart.hasAttribute('auto-rotate');if(on)heart.setAttribute('auto-rotate','');else heart.removeAttribute('auto-rotate');e.currentTarget.classList.toggle('active',on);});
 document.getElementById('reset').addEventListener('click',()=>{heart.removeAttribute('auto-rotate');heart.setAttribute('camera-orbit','0deg 75deg auto');heart.setAttribute('camera-target','0m 0m 0m');document.getElementById('auto').classList.remove('active');document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view==='front'));selectPart('lv');});
 selectPart('lv');
+<\/script>
+</body>
+</html>
+`;
+
+const modal = document.getElementById('myModal');
+const iframe = document.getElementById('heartIframe');
+
+function openModal() {
+    iframe.srcdoc = heartCode; // حقن الكود داخل النافذة
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+    iframe.srcdoc = ""; // إفراغ الإطار
+}
 </script>
 </body>
 </html>
