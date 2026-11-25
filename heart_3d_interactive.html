@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04152b">
+<title>القلب البشري | تشريح ثلاثي الأبعاد</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.3.0/dist/model-viewer.min.js"></script>
+<style>
+:root{--bg:#04152b;--panel:#081e3a;--panel2:#0b2749;--line:#1b8fe8;--cyan:#55dfff;--text:#f3f8ff;--muted:#b8cbe0;--glow:0 0 18px #168fe866}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 35%,#0a2a4e 0,#04152b 55%,#020b18 100%);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:1400px;margin:auto;padding:18px clamp(10px,2vw,28px) 32px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:clamp(22px,3vw,34px);margin:0 0 6px}header p{color:var(--muted);margin:0;font-size:14px;line-height:1.6}
+.pill{border:1px solid #1a78bd;border-radius:999px;padding:8px 13px;color:#bcefff;background:#082448;box-shadow:var(--glow);font-size:13px}
+.layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(280px,.85fr);gap:16px;align-items:stretch}
+.card{background:linear-gradient(155deg,#0a2343eF,#06172deF);border:1px solid #1769a2;border-radius:20px;box-shadow:0 14px 36px #0007,inset 0 0 24px #1464a31c;overflow:hidden}
+.viewer-head{padding:13px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #17476f}
+.viewer-head strong{font-size:16px}.hint{font-size:12px;color:#a9c5de}
+.stage{height:min(68vh,720px);min-height:430px;position:relative;background:radial-gradient(ellipse at 50% 60%,#123b63 0,#061a32 56%,#020c1b 100%)}
+model-viewer{width:100%;height:100%;background:transparent;--poster-color:transparent;outline:none;touch-action:pan-y;}
+model-viewer::part(default-progress-bar){height:5px;background:#53dcff}
+model-viewer::part(default-progress-mask){background:#082343}
+.hotspot{border:0;background:transparent;color:white;display:flex;align-items:center;gap:6px;cursor:pointer;direction:rtl;filter:drop-shadow(0 2px 4px #001)}
+.hotspot .dot{display:grid;place-items:center;width:25px;height:25px;border:2px solid #9ef2ff;border-radius:50%;background:#075c9c;color:white;font-weight:bold;box-shadow:0 0 13px #42d7ff}
+.hotspot .tag{white-space:nowrap;border:1px solid #64dfff;border-radius:8px;padding:4px 7px;background:#03182de8;font:12px Tahoma,Arial;max-width:160px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;padding:13px 15px;border-top:1px solid #17476f}
+button{font-family:inherit;cursor:pointer}
+.ctrl,.part-btn{color:var(--text);border:1px solid #23618f;border-radius:10px;background:#0b2b50;padding:9px 12px;font-size:13px;transition:.18s}
+.ctrl:hover,.part-btn:hover,.ctrl.active,.part-btn.active{border-color:var(--cyan);background:#0a4773;box-shadow:var(--glow)}
+.side{display:flex;flex-direction:column;gap:14px}
+.info{padding:18px;min-height:165px}
+.info h2{font-size:20px;margin:0 0 5px;color:#e8f8ff}.en{color:#74dfff;font-size:13px;direction:ltr;text-align:right}
+.info p{color:#d9e8f7;line-height:1.9;font-size:14px;margin:12px 0 0}
+.parts{padding:16px}.parts h2,.reference h2{font-size:17px;margin:0 0 12px}
+.part-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.part-btn{text-align:right;line-height:1.45;min-height:52px}.part-btn small{display:block;color:#8edfff;direction:ltr;text-align:right;font-size:11px}
+.reference{margin-top:16px;padding:16px}.reference img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid #1e6392}
+.foot{margin-top:16px;color:#9db7cf;font-size:12px;line-height:1.8;text-align:center}.foot a{color:#7edfff}
+.loading{position:absolute;inset:auto 14px 14px 14px;border:1px solid #225d87;border-radius:10px;background:#04182cdd;padding:9px 12px;text-align:center;font-size:12px;color:#c7e8f8;pointer-events:none}
+.err{display:none;color:#ffd9d9;background:#351b27;border-color:#9d465b}
+.note{font-size:11px;color:#9cb8d1;line-height:1.7;margin-top:10px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.stage{height:60vh;min-height:390px}.side{display:grid;grid-template-columns:1fr 1fr}.info{grid-column:1/-1}}
+@media(max-width:560px){.wrap{padding:12px 9px 24px}.stage{height:53vh;min-height:340px}.side{display:flex}.controls{gap:6px}.ctrl{padding:8px 9px;font-size:12px}.hotspot .tag{font-size:10px;max-width:105px}.part-grid{grid-template-columns:1fr 1fr}.pill{font-size:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>القلب البشري — تشريح ثلاثي الأبعاد</h1><p>اسحب القلب بإصبعك لتدويره، واستخدم إصبعين للتقريب والإبعاد. اختر أي جزء لعرض وظيفته.</p></div>
+    <div class="pill">3D Interactive Anatomy · عربي / English</div>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <div class="viewer-head"><strong>المجسّم التشريحي</strong><span class="hint">Drag to rotate · Pinch to zoom</span></div>
+      <div class="stage">
+        <model-viewer id="heart" 
+          src="https://raw.githubusercontent.com/yihalem123/Human-Organ3D/main/models/heart.glb"
+          alt="Human heart anatomical 3D cutaway model"
+          camera-controls interaction-prompt="auto" interaction-prompt-threshold="900"
+          camera-orbit="0deg 75deg auto" camera-target="0m 0m 0m"
+          field-of-view="30deg" min-camera-orbit="auto 12deg auto" max-camera-orbit="auto 168deg auto"
+          shadow-intensity="1" exposure="1.05" environment-image="neutral" loading="eager">
+          <button class="hotspot" slot="hotspot-aorta" data-position="0m 0.052m 0.012m" data-normal="0 1 0" data-part="aorta"><span class="dot">1</span><span class="tag">Aorta · الأبهر</span></button>
+          <button class="hotspot" slot="hotspot-svc" data-position="-0.025m 0.047m 0.006m" data-normal="-1 0 0" data-part="svc"><span class="dot">2</span><span class="tag">SVC · الأجوف العلوي</span></button>
+          <button class="hotspot" slot="hotspot-ivc" data-position="-0.021m -0.055m 0.006m" data-normal="-1 0 0" data-part="ivc"><span class="dot">3</span><span class="tag">IVC · الأجوف السفلي</span></button>
+          <button class="hotspot" slot="hotspot-pa" data-position="0.019m 0.031m 0.023m" data-normal="0 0 1" data-part="pa"><span class="dot">4</span><span class="tag">Pulmonary artery · الرئوي</span></button>
+          <button class="hotspot" slot="hotspot-pv" data-position="0.031m 0.008m -0.017m" data-normal="0 0 -1" data-part="pv"><span class="dot">5</span><span class="tag">Pulmonary veins · الأوردة</span></button>
+          <button class="hotspot" slot="hotspot-ra" data-position="-0.022m 0.008m 0.027m" data-normal="0 0 1" data-part="ra"><span class="dot">6</span><span class="tag">Right atrium · الأيمن</span></button>
+          <button class="hotspot" slot="hotspot-la" data-position="0.022m 0.008m -0.013m" data-normal="0 0 -1" data-part="la"><span class="dot">7</span><span class="tag">Left atrium · الأيسر</span></button>
+          <button class="hotspot" slot="hotspot-rv" data-position="-0.016m -0.029m 0.029m" data-normal="0 0 1" data-part="rv"><span class="dot">8</span><span class="tag">Right ventricle · البطين الأيمن</span></button>
+          <button class="hotspot" slot="hotspot-lv" data-position="0.017m -0.032m 0.023m" data-normal="0 0 1" data-part="lv"><span class="dot">9</span><span class="tag">Left ventricle · البطين الأيسر</span></button>
+          <button class="hotspot" slot="hotspot-cor" data-position="0m -0.025m 0.036m" data-normal="0 0 1" data-part="cor"><span class="dot">10</span><span class="tag">Coronary vessels · التاجية</span></button>
+        </model-viewer>
+        <div class="loading" id="status">جارٍ تحميل المجسّم ثلاثي الأبعاد… قد يحتاج لحظات واتصال إنترنت</div>
+        <div class="loading err" id="error">تعذّر تحميل المجسّم من المصدر. استخدم رابط العارض البديل أسفل الصفحة.</div>
+      </div>
+      <div class="controls">
+        <button class="ctrl active" data-view="front">الأمام</button>
+        <button class="ctrl" data-view="back">الخلف</button>
+        <button class="ctrl" data-view="right">الجانب الأيمن</button>
+        <button class="ctrl" data-view="left">الجانب الأيسر</button>
+        <button class="ctrl" id="auto">تدوير تلقائي</button>
+        <button class="ctrl" id="reset">إعادة العرض</button>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="card info" aria-live="polite">
+        <h2 id="info-ar">البطين الأيسر</h2>
+        <div class="en" id="info-en">Left Ventricle</div>
+        <p id="info-text">أقوى حجرات القلب عضلياً. يستقبل الدم المؤكسج من الأذين الأيسر ثم يضخه عبر الصمام الأبهري إلى الشريان الأبهر ومنها إلى أنحاء الجسم.</p>
+        <div class="note">ملاحظة: مواضع العلامات على المجسّم إرشادية تقريبية، وقد تختلف قليلاً عن الصورة المرجعية بحسب اتجاه النموذج ثلاثي الأبعاد.</div>
+      </section>
+      <section class="card parts">
+        <h2>الأجزاء التشريحية — اضغط للتعرّف</h2>
+        <div class="part-grid" id="part-list">
+          <button class="part-btn" data-part="aorta">الشريان الأبهر<small>Aorta</small></button>
+          <button class="part-btn" data-part="svc">الوريد الأجوف العلوي<small>Superior vena cava</small></button>
+          <button class="part-btn" data-part="ivc">الوريد الأجوف السفلي<small>Inferior vena cava</small></button>
+          <button class="part-btn" data-part="pa">الشريان الرئوي<small>Pulmonary artery</small></button>
+          <button class="part-btn" data-part="pv">الأوردة الرئوية<small>Pulmonary veins</small></button>
+          <button class="part-btn" data-part="ra">الأذين الأيمن<small>Right atrium</small></button>
+          <button class="part-btn" data-part="la">الأذين الأيسر<small>Left atrium</small></button>
+          <button class="part-btn" data-part="rv">البطين الأيمن<small>Right ventricle</small></button>
+          <button class="part-btn" data-part="lv">البطين الأيسر<small>Left ventricle</small></button>
+          <button class="part-btn" data-part="cor">الأوعية التاجية<small>Coronary vessels</small></button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <section class="card reference">
+    <h2>مرجع الجهات الأربع</h2>
+    <p class="hint">لوحة توضيحية ثابتة للمقارنة بين الأمام والخلف والجانب الأيمن والأيسر.</p>
+    <img src="heart_4_views_reference.png" alt="Four anatomical views of the human heart with bilingual labels">
+  </section>
+  <div class="foot">
+    هذا عارض تعليمي يستخدم نموذج قلب ثلاثي الأبعاد خارجي؛ يتطلب اتصالاً بالإنترنت لتحميل النموذج ومكتبة العرض. لا يمثل استخراجاً مطابقاً لمجسّم الصورة الأصلية.
+    <br><a href="https://grab3d.com/models/anatomy/human-heart-cutaway/" target="_blank" rel="noopener">صفحة مصدر المجسّم ثلاثي الأبعاد</a> ·
+    <a href="https://3d.nih.gov/entries/3DPX-022787" target="_blank" rel="noopener">فتح العارض الأصلي البديل</a>
+  </div>
+</div>
+<script>
+const heart=document.getElementById('heart');
+const statusBox=document.getElementById('status');
+const errorBox=document.getElementById('error');
+heart.addEventListener('load',()=>{statusBox.style.display='none';});
+heart.addEventListener('error',()=>{statusBox.style.display='none';errorBox.style.display='block';});
+const parts={
+ aorta:{ar:'الشريان الأبهر',en:'Aorta',text:'أكبر شريان في الجسم. يستقبل الدم الغني بالأوكسجين من البطين الأيسر عبر الصمام الأبهري، ثم يوزّعه إلى أعضاء الجسم.'},
+ svc:{ar:'الوريد الأجوف العلوي',en:'Superior Vena Cava',text:'يعيد الدم غير المؤكسج من الرأس والرقبة والذراعين والجزء العلوي من الجسم إلى الأذين الأيمن.'},
+ ivc:{ar:'الوريد الأجوف السفلي',en:'Inferior Vena Cava',text:'يعيد الدم غير المؤكسج من البطن والحوض والطرفين السفليين إلى الأذين الأيمن.'},
+ pa:{ar:'الشريان الرئوي',en:'Pulmonary Artery',text:'ينقل الدم غير المؤكسج من البطين الأيمن إلى الرئتين حتى يتخلص من ثاني أوكسيد الكربون ويحصل على الأوكسجين.'},
+ pv:{ar:'الأوردة الرئوية',en:'Pulmonary Veins',text:'تنقل الدم الغني بالأوكسجين من الرئتين إلى الأذين الأيسر. وهي استثناء مهم لأنّها أوردة تحمل دماً مؤكسجاً.'},
+ ra:{ar:'الأذين الأيمن',en:'Right Atrium',text:'يستقبل الدم غير المؤكسج القادم من الوريدين الأجوفين، ثم يمرّره عبر الصمام ثلاثي الشرفات إلى البطين الأيمن.'},
+ la:{ar:'الأذين الأيسر',en:'Left Atrium',text:'يستقبل الدم المؤكسج القادم من الأوردة الرئوية، ثم يمرّره عبر الصمام التاجي (ثنائي الشرفات) إلى البطين الأيسر.'},
+ rv:{ar:'البطين الأيمن',en:'Right Ventricle',text:'يضخ الدم غير المؤكسج عبر الصمام الرئوي إلى الشريان الرئوي باتجاه الرئتين.'},
+ lv:{ar:'البطين الأيسر',en:'Left Ventricle',text:'أقوى حجرات القلب عضلياً. يستقبل الدم المؤكسج من الأذين الأيسر ثم يضخه عبر الصمام الأبهري إلى الشريان الأبهر ومنها إلى أنحاء الجسم.'},
+ cor:{ar:'الأوعية التاجية',en:'Coronary Vessels',text:'الشرايين التاجية تغذي عضلة القلب بالدم والأوكسجين، بينما تعيد الأوردة التاجية الدم بعد استهلاك الأوكسجين.'}
+};
+function selectPart(id){const p=parts[id];if(!p)return;document.getElementById('info-ar').textContent=p.ar;document.getElementById('info-en').textContent=p.en;document.getElementById('info-text').textContent=p.text;document.querySelectorAll('[data-part]').forEach(b=>b.classList.toggle('active',b.dataset.part===id));}
+document.querySelectorAll('[data-part]').forEach(b=>b.addEventListener('click',()=>selectPart(b.dataset.part)));
+const views={front:0,back:180,right:90,left:-90};
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{const v=b.dataset.view;heart.removeAttribute('auto-rotate');document.getElementById('auto').classList.remove('active');heart.setAttribute('camera-orbit',`${views[v]}deg 75deg auto`);document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));}));
+document.getElementById('auto').addEventListener('click',e=>{const on=!heart.hasAttribute('auto-rotate');if(on)heart.setAttribute('auto-rotate','');else heart.removeAttribute('auto-rotate');e.currentTarget.classList.toggle('active',on);});
+document.getElementById('reset').addEventListener('click',()=>{heart.removeAttribute('auto-rotate');heart.setAttribute('camera-orbit','0deg 75deg auto');heart.setAttribute('camera-target','0m 0m 0m');document.getElementById('auto').classList.remove('active');document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view==='front'));selectPart('lv');});
+selectPart('lv');
+</script>
+</body>
+</html>
